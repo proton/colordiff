@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .diff {
+            font-family: Consolas, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+            position: relative;
+        }
+
+        .diff-editor {
+            position: relative;
+            display: block;
+            height: 100vh;
+            width: 100%;
+            border: none;
+            caret-color: black;
+        }
+
+        .diff-editor:focus-visible {
+            outline: none;
+        }
+
+        .hl-add {
+            color: green;
+        }
+
+        .hl-del {
+            color: red;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="diff">
+        <div class="diff-preview"></div>
+        <div class="diff-editor" contenteditable spellcheck="false">
+            Paste your diff here
+        </div>
+    </div>
+
+    <script>
+        const toggleClass = (element, className, toggle) => {
+            if (toggle) element.classList.add(className)
+            else element.classList.remove(className)
+        }
+
+        const highlite = (editor) => {
+            for (const child of editor.children) {
+                toggleClass(child, 'hl-add', child.innerHTML.match('^&gt; '))
+                toggleClass(child, 'hl-del', child.innerHTML.match('^&lt; '))
+            }
+        }
+
+        const editor = document.getElementsByClassName('diff-editor')[0]
+        editor.addEventListener('input', _ => highlite(editor))
+        highlite(editor)
+    </script>
+
+</body>
+
+</html>
