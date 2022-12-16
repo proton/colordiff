@@ -8,7 +8,11 @@
             padding: 0;
         }
 
-        pre {
+        pre, div {
+            margin: 0;
+            padding: 0;
+            font-size: 16px;
+            font-family: Consolas, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
             margin-bottom: 0;
         }
 
@@ -44,9 +48,7 @@
 <body>
     <div class="diff">
         <div class="diff-preview"></div>
-        <div class="diff-editor" contenteditable spellcheck="false">
-            Paste your diff here
-        </div>
+        <div class="diff-editor" contenteditable spellcheck="false">Paste your diff here</div>
     </div>
 
     <script>
@@ -57,10 +59,14 @@
 
         const highlite = (editor) => {
             const html = editor.innerHTML
+            if (!html) return;
+
             const start = html.indexOf('<')
             if (start > 0) {
                 const entry = html.substring(0, start)
-                editor.innerHTML = `<div>${entry}</div>` + html.substring(start)
+                editor.innerHTML = `<pre>${entry}</pre>` + html.substring(start)
+            } else if (start == -1) {
+                editor.innerHTML = `<pre>${html}</pre>`
             }
             for (const child of editor.children) {
                 const inner = child.innerHTML;
@@ -70,7 +76,7 @@
         }
 
         const paste = (editor) => {
-            editor.innerHTML = editor.innerText.split("\n").map(text => `<div>${text}</div>`).join("")
+            editor.innerHTML = editor.innerText.split("\n").map(text => `<pre>${text}</pre>`).join("")
             highlite(editor)
         }
 
