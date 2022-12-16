@@ -8,6 +8,10 @@
             padding: 0;
         }
 
+        pre {
+            margin-bottom: 0;
+        }
+
         .diff {
             font-family: Consolas, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
             position: relative;
@@ -52,9 +56,16 @@
         }
 
         const highlite = (editor) => {
+            const html = editor.innerHTML
+            const start = html.indexOf('<')
+            if (start > 0) {
+                const entry = html.substring(0, start)
+                editor.innerHTML = `<div>${entry}</div>` + html.substring(start)
+            }
             for (const child of editor.children) {
-                toggleClass(child, 'hl-add', child.innerHTML.match('^&gt; '))
-                toggleClass(child, 'hl-del', child.innerHTML.match('^&lt; '))
+                const inner = child.innerHTML;
+                toggleClass(child, 'hl-add', inner.match('^&gt; ') || inner.match('^\\\+'))
+                toggleClass(child, 'hl-del', inner.match('^&lt; ') || inner.match('^\\\-'))
             }
         }
 
