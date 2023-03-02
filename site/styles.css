@@ -14,6 +14,7 @@ pre, div {
 .diff {
   font-family: Consolas, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
   position: relative;
+  margin: 10px;
 }
 
 .diff-editor {
@@ -22,19 +23,48 @@ pre, div {
   height: 100vh;
   width: 100%;
   border: none;
-  caret-color: black;
 }
 
 .diff-editor:focus-visible {
   outline: none;
 }
 
+body {
+  background: #101010;
+}
+
+.diff-editor {
+  background: #d3d7cf;
+  caret-color: #101010;
+  color: #101010;
+}
+
 .hl-add {
-  color: green;
+  color: #4e9a06;
 }
 
 .hl-del {
-  color: red;
+  color: #ef2929;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #101010;
+  }
+
+  .diff-editor {
+    background: #101010;
+    caret-color: #d3d7cf;
+    color: #d3d7cf;
+  }
+
+  .hl-add {
+    color: #4e9a06;
+  }
+
+  .hl-del {
+    color: #ef2929;
+  }
 }
 
 .other-web-sites {
