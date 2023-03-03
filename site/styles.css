@@ -30,11 +30,11 @@ pre, div {
 }
 
 body {
-  background: #101010;
+  background: #eeeeee;
 }
 
 .diff-editor {
-  background: #d3d7cf;
+  background: #eeeeee;
   caret-color: #101010;
   color: #101010;
 }
@@ -54,8 +54,8 @@ body {
 
   .diff-editor {
     background: #101010;
-    caret-color: #d3d7cf;
-    color: #d3d7cf;
+    caret-color: #eeeeee;
+    color: #eeeeee;
   }
 
   .hl-add {
