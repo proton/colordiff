@@ -1,0 +1,5 @@
+helm:
+  parameters:
+  - name: image.tag
+    value: "44323412926"
+    forceString: true
